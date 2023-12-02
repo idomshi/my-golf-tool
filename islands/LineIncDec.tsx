@@ -1,25 +1,18 @@
-import { divide, setDivide } from "./assets/store.ts";
+import { decDivide, incDivide } from "./assets/store.ts";
 
 export default function LineIncDec() {
-  function inc() {
-    setDivide(String(divide.value + 1));
-  }
-
-  function dec() {
-    setDivide(String(Math.max(1, divide.value - 1)));
-  }
   return (
-    <div class="flex flex-row justify-end gap-2">
+    <div class="mt-4 flex flex-row justify-end gap-2">
       <button
         type="buttonn"
-        onClick={dec}
+        onClick={decDivide}
         class="w-12 h-12 bg-indigo-500 text-white rounded text-2xl"
       >
         -
       </button>
       <button
         type="buttonn"
-        onClick={inc}
+        onClick={incDivide}
         class="w-12 h-12 bg-indigo-500 text-white rounded text-2xl"
       >
         +

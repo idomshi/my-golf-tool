@@ -1,9 +1,9 @@
-import { computed, signal } from "@preact/signals";
+import { batch, computed, signal } from "@preact/signals";
 
 export const total = signal(11000);
 export const entry = signal(500);
 export const divide = signal(4);
-export const ball = signal(17);
+export const ball = signal([17, 17, 17, 17]);
 
 export function setTotal(value: string) {
   const v = parseInt(value);
@@ -17,28 +17,43 @@ export function setEntry(value: string) {
   entry.value = v;
 }
 
-export function setDivide(value: string) {
-  const v = parseInt(value);
-  if (isNaN(v)) return;
-  divide.value = v;
+export function incDivide() {
+  batch(() => {
+    divide.value += 1;
+    const b = ball.value[ball.value.length - 1];
+    ball.value.push(b);
+  });
 }
 
-export function setBall(value: string) {
-  const v = parseInt(value);
-  if (isNaN(v)) return;
-  ball.value = v;
+export function decDivide() {
+  batch(() => {
+    divide.value -= 1;
+    if (divide.value < 1) {
+      divide.value = 1;
+      return;
+    }
+    ball.value.splice(-1);
+  });
+}
+
+export function setBall(index: number, value: string) {
+  if (index >= ball.value.length) return;
+  const num = parseInt(value);
+  if (isNaN(num)) return;
+  ball.value[index] = num;
 }
 
 export const stops = computed(() => {
   let remain = total.value;
-  const usable = Math.round(total.value - entry.value * divide.value) /
+  const usable = (total.value - entry.value * divide.value) /
     divide.value;
   const result = [];
   for (let i = 0; i < divide.value; ++i) {
     result.push({
-      start: Math.floor((remain - entry.value) / ball.value),
-      stop: Math.floor((remain - entry.value - usable) / ball.value),
-      balls: Math.floor(usable / ball.value),
+      start: Math.floor((remain - entry.value) / ball.value[i]),
+      stop: Math.floor((remain - entry.value - usable) / ball.value[i]),
+      balls: Math.floor(usable / ball.value[i]),
+      ballfee: ball.value[i],
     });
 
     remain -= entry.value + usable;
