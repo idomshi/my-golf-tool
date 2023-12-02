@@ -4,7 +4,7 @@
 
 import * as $0 from "./routes/_404.tsx";
 import * as $1 from "./routes/_app.tsx";
-import * as $2 from "./routes/index.tsx";
+import * as $2 from "./routes/prepaid.tsx";
 import * as $3 from "./routes/score.tsx";
 import * as $$0 from "./islands/TheForm.tsx";
 import * as $$1 from "./islands/assets/store.ts";
