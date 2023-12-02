@@ -10,8 +10,9 @@ import * as $4 from "./routes/logout.ts";
 import * as $5 from "./routes/prepaid.tsx";
 import * as $6 from "./routes/score.tsx";
 import * as $7 from "./routes/secret_or_redirect.tsx";
-import * as $$0 from "./islands/TheForm.tsx";
-import * as $$1 from "./islands/assets/store.ts";
+import * as $$0 from "./islands/LineIncDec.tsx";
+import * as $$1 from "./islands/TheForm.tsx";
+import * as $$2 from "./islands/assets/store.ts";
 
 const manifest = {
   routes: {
@@ -25,8 +26,9 @@ const manifest = {
     "./routes/secret_or_redirect.tsx": $7,
   },
   islands: {
-    "./islands/TheForm.tsx": $$0,
-    "./islands/assets/store.ts": $$1,
+    "./islands/LineIncDec.tsx": $$0,
+    "./islands/TheForm.tsx": $$1,
+    "./islands/assets/store.ts": $$2,
   },
   baseUrl: import.meta.url,
 };
